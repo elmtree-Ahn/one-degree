@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>지구가 조금 더워지면, 우리 동네는 얼마나 달라질까? | 어게인 실험과학 수학학원</title>
+<meta name="description" content="평균 기온 1도 계산, 운정의 2081~2100년 계절 길이, 더워지면 잦아지는 것 고르기, OX 퀴즈, NASA · 기상청 사이트 바로가기로 지구 온난화와 기후 위기를 복습해요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#e8f4fd; --sky2:#bfe0f8; --blue:#3a9ae0; --blue-d:#2476b8; --line:#d3e7f5;
+  --warm:#ff8a3d; --warm-d:#e0661c; --warm-s:#fff0e3;
+  --navy:#24407e; --navy-d:#172c5c; --navy-s:#e7ecf8;
+  --ruby:#d81e4a; --ruby-d:#a3102f; --ink:#33414f; --sub:#6c7a8a;
+  --good:#1f8a57; --good-s:#e3f6ec; --bad:#c8283a; --bad-s:#ffe9ec;
+  --spring:#5cb85c; --summer:#e8463a; --autumn:#f2b01e; --winter:#3a8fd9;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{margin:0;color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-weight:500;background:#fff}
+body{min-height:100vh;display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation}
+.jua,header,nav,.bbtn,.say,.card h2,.lbl,.quiz,footer,.toast,.ask,.mbar,.yr,.sg,.tile,.pick,.link,.calc{font-family:"Jua","Noto Sans KR",sans-serif}
+
+.bbtn{font-size:22px;min-height:60px;min-width:140px;padding:8px 26px;color:#fff;background:var(--navy);border-radius:999px;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.15),0 5px 0 var(--navy-d);word-break:keep-all;line-height:1.2}
+.bbtn:active{transform:translateY(3px)}
+.bbtn:disabled{opacity:.4;cursor:default;transform:none}
+.bbtn.warm{background:var(--warm);box-shadow:inset 0 -6px 0 rgba(0,0,0,.1),0 5px 0 var(--warm-d)}
+.bbtn.white{background:#fff;color:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.05),0 5px 0 var(--line);border:3px solid var(--sky2)}
+.bbtn.white.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.15),0 5px 0 var(--navy-d)}
+.bbtn.white.right{background:var(--good-s);color:var(--good);border-color:var(--good)}
+.bbtn.white.wrong{background:var(--bad-s);color:var(--bad);border-color:var(--bad)}
+.bbtn small{display:block;font-size:.66em;opacity:.8}
+
+header{position:sticky;top:0;z-index:30;background:#fff;box-shadow:0 3px 0 var(--line);padding:8px 16px}
+.head-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.titles{flex:1;min-width:0}
+.brand{font-size:16px;color:var(--sub)}
+h1{margin:0;font-weight:400;font-size:clamp(19px,3.1vw,30px);color:var(--navy);line-height:1.18;word-break:keep-all}
+.share{min-width:0;font-size:18px;min-height:50px;padding:6px 22px;flex:none}
+
+nav{max-width:1100px;width:100%;margin:10px auto 0;padding:0 16px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tab{min-height:54px;border-radius:18px;background:var(--sky);font-size:clamp(16px,2vw,22px);line-height:1.15;padding:4px;
+  border:3px solid transparent;word-break:keep-all;text-align:center;color:var(--navy)}
+.tab.on{background:var(--warm-s);border-color:var(--warm);color:var(--warm-d)}
+
+main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:10px 16px 16px}
+.panel{display:none}
+.panel.on{display:block}
+.card{background:var(--sky);border-radius:24px;padding:14px;margin-bottom:14px}
+.card h2{margin:2px 0 10px;font-weight:400;text-align:center;color:var(--navy);font-size:clamp(22px,2.8vw,30px);line-height:1.25;word-break:keep-all}
+.white-box{background:#fff;border-radius:18px;box-shadow:0 0 0 3px var(--line);padding:14px}
+.btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.btns .bbtn{min-width:0;padding:6px 10px;font-size:clamp(18px,2.4vw,24px)}
+.say{min-height:3.1em;margin:12px 4px 10px;text-align:center;font-size:clamp(19px,2.3vw,25px);line-height:1.45;word-break:keep-all}
+.say b{font-weight:400;color:var(--warm-d)}
+.say.good b{color:var(--good)}
+.note{margin:0;background:#fff;border-radius:16px;padding:10px 14px;font-size:clamp(15px,1.8vw,18px);line-height:1.6;color:var(--ink);word-break:keep-all}
+.note b{color:var(--navy)}
+.note p{margin:0}
+.note p+p{margin-top:4px}
+.note .src{color:var(--sub);font-size:.92em}
+
+/* ① 1도 계산 */
+.ask{text-align:center;font-size:clamp(22px,3vw,32px);line-height:1.4;color:var(--ink);word-break:keep-all;margin:4px 0 14px}
+.ask b{font-weight:400;color:var(--warm-d)}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;align-items:end}
+.mcol{display:flex;flex-direction:column;align-items:center;min-width:0}
+.mval{font-family:"Jua",sans-serif;font-size:clamp(12px,2.2vw,20px);color:var(--warm-d);height:1.4em;line-height:1.4em;white-space:nowrap}
+.mbox{position:relative;width:100%;height:clamp(130px,26vw,210px);border-bottom:3px solid var(--sub)}
+.mbar{position:absolute;left:12%;right:12%;bottom:0;height:0;border-radius:8px 8px 0 0;background:var(--warm);transition:height .5s}
+.mname{font-family:"Jua",sans-serif;font-size:clamp(12px,1.8vw,18px);color:var(--navy);margin-top:4px;white-space:nowrap}
+.calc{margin:14px 0 0;text-align:center;font-size:clamp(20px,2.8vw,28px);color:var(--navy);line-height:1.4;word-break:keep-all}
+.calc b{font-weight:400;color:var(--warm-d);font-size:1.15em}
+.range{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px 0 4px;font-family:"Jua",sans-serif;font-size:clamp(19px,2.4vw,24px);color:var(--navy)}
+.range input{flex:1 1 200px;max-width:460px;height:44px;accent-color:var(--warm)}
+.range b{font-weight:400;color:var(--warm-d);min-width:2.6em;display:inline-block;text-align:center;font-size:1.2em}
+
+/* ② 운정의 미래 */
+.yr{display:flex;height:76px;border-radius:16px;overflow:hidden;box-shadow:0 0 0 3px var(--line)}
+.yr div{flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(17px,2.6vw,26px);transition:width .6s;overflow:hidden;white-space:nowrap}
+.yrcap{display:flex;justify-content:space-between;font-family:"Jua",sans-serif;color:var(--sub);font-size:15px;margin-top:4px}
+.sgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.sg{background:#fff;border-radius:14px;padding:8px 4px;text-align:center;border-top:8px solid;line-height:1.25}
+.sg .n{font-size:clamp(16px,2vw,20px);color:var(--sub)}
+.sg .d{font-size:clamp(24px,3.4vw,34px);color:var(--ink)}
+.sg .c{font-size:clamp(14px,1.8vw,18px);color:var(--sub);min-height:1.3em}
+.sg .c.up{color:var(--summer)}
+.sg .c.down{color:var(--winter)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.tile{background:#fff;border-radius:16px;padding:10px 6px;text-align:center;line-height:1.25;box-shadow:0 0 0 3px var(--line)}
+.tile .n{font-size:clamp(15px,1.9vw,19px);color:var(--sub)}
+.tile .v{font-size:clamp(23px,3.4vw,34px);color:var(--navy);margin:2px 0}
+.tile .c{font-size:clamp(14px,1.8vw,18px);color:var(--warm-d);min-height:1.3em}
+
+/* ③ 고르기 */
+.count{text-align:center;font-family:"Jua",sans-serif;font-size:clamp(19px,2.4vw,24px);color:var(--sub);margin-bottom:10px}
+.count b{font-weight:400;color:var(--good);font-size:1.3em}
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pick{position:relative;min-height:84px;border-radius:20px;background:#fff;border:3px solid var(--sky2);box-shadow:0 5px 0 var(--line);
+  font-size:clamp(18px,2.4vw,24px);line-height:1.25;color:var(--navy);padding:10px 8px;word-break:keep-all}
+.pick:active{transform:translateY(3px)}
+.pick.right{background:var(--good-s);border-color:var(--good);color:var(--good);box-shadow:0 5px 0 #a9dcc1}
+.pick.wrong{background:#f1f3f6;border-color:#c5ccd5;color:#8a96a3;box-shadow:0 5px 0 #dde2e8}
+.pick .mk{position:absolute;top:4px;right:10px;font-size:22px;font-family:system-ui,sans-serif;font-weight:800}
+.say.ok b{color:var(--good)}
+.say.no b{color:var(--bad)}
+
+/* ④ OX */
+.quiz{max-width:880px;margin:0 auto;text-align:center}
+.score{font-size:24px;color:var(--sub)}
+.score b{font-weight:400;color:var(--warm-d);font-size:1.3em}
+.q{background:var(--sky);border-radius:28px;padding:24px 20px;margin:10px 0;font-size:clamp(24px,3.4vw,34px);line-height:1.38;word-break:keep-all;min-height:130px;display:grid;place-items:center}
+.ox{display:flex;gap:20px;justify-content:center}
+.ox button{width:min(42%,220px);aspect-ratio:1.45;border-radius:32px;font-size:clamp(70px,12vw,100px);line-height:1;color:#fff;font-family:system-ui,sans-serif;font-weight:800}
+.ox .o{background:var(--blue);box-shadow:0 8px 0 var(--blue-d)}
+.ox .x{background:var(--ruby);box-shadow:0 8px 0 var(--ruby-d)}
+.ox button:active{transform:translateY(4px)}
+.ox button:disabled{opacity:.4}
+.fb{min-height:66px;margin:16px 0 8px;font-size:clamp(21px,2.8vw,27px);line-height:1.4;word-break:keep-all}
+.fb.good{color:var(--good)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
+
+/* ⑤ 집에서 */
+.links{display:grid;gap:14px}
+@media (min-width:860px){.links{grid-template-columns:1fr 1fr}}
+.links .card{margin-bottom:0;display:flex;flex-direction:column}
+.link{display:flex;align-items:center;justify-content:center;gap:10px;min-height:76px;padding:10px 20px;border-radius:24px;text-decoration:none;color:#fff;
+  font-size:clamp(22px,2.8vw,28px);line-height:1.2;text-align:center;word-break:keep-all;background:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.15),0 6px 0 var(--navy-d)}
+.link.warm{background:var(--warm);box-shadow:inset 0 -6px 0 rgba(0,0,0,.1),0 6px 0 var(--warm-d)}
+.link:active{transform:translateY(3px)}
+.steps{margin:14px 0 0;padding:12px 14px 12px 40px;background:#fff;border-radius:16px;font-size:clamp(16px,1.9vw,19px);line-height:1.6;word-break:keep-all;flex:1}
+.steps li+li{margin-top:2px}
+.tag{display:inline-block;margin:0 0 10px;padding:2px 12px;border-radius:999px;background:#fff;color:var(--warm-d);font-family:"Jua",sans-serif;font-size:17px}
+.end{margin:16px 0 0;text-align:center;font-family:"Jua",sans-serif;font-size:clamp(21px,2.8vw,28px);color:var(--good);line-height:1.4;word-break:keep-all}
+
+footer span{white-space:nowrap}
+footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color:var(--navy);line-height:1.6;word-break:keep-all}
+.toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:20px;padding:12px 26px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99;white-space:nowrap}
+.toast.on{opacity:1}
+.conf{position:fixed;top:-20px;width:14px;height:14px;z-index:98;pointer-events:none;animation:fall linear forwards}
+.spk{position:fixed;z-index:97;pointer-events:none;font-size:28px;line-height:1;color:#ffc93c;text-shadow:0 0 6px #fff;animation:spk .9s ease-out forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes spk{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3) rotate(120deg);opacity:0}}
+
+@media (max-width:760px){
+  header{padding:6px 10px}
+  .head-in{gap:6px}
+  .brand{font-size:13px}
+  .share.bbtn{font-size:15px;min-height:44px;padding:4px 12px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15),0 3px 0 var(--navy-d)}
+  nav{margin-top:8px;padding:0 10px;gap:6px;grid-template-columns:repeat(6,1fr)}
+  .tab{grid-column:span 2;min-height:46px;border-radius:14px}
+  .tab:nth-child(n+4){grid-column:span 3}
+  main{padding:8px 10px 12px}
+  .card{padding:12px 8px;border-radius:20px}
+  .white-box{padding:10px 6px}
+  .bbtn{font-size:20px;min-height:54px;padding:6px 20px}
+  .btns{gap:7px}
+  .btns .bbtn{font-size:18px;padding:4px 4px;min-height:60px}
+  .months{gap:2px}
+  .mbar{left:8%;right:8%;border-radius:5px 5px 0 0}
+  .sgs,.tiles{gap:5px}
+  .yr{height:60px}
+  .picks{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .pick{min-height:72px}
+}
+</style>
+</head>
+<body>
+<header><div class="head-in">
+  <div class="titles"><div class="brand">어게인 실험과학 수학학원</div><h1>지구가 조금 더워지면, 우리 동네는 얼마나 달라질까?</h1></div>
+  <button class="bbtn share" id="share">링크 복사</button>
+</div></header>
+
+<nav>
+  <button class="tab on" data-t="0">1도 계산</button>
+  <button class="tab" data-t="1">운정의 미래</button>
+  <button class="tab" data-t="2">잦아지는 것</button>
+  <button class="tab" data-t="3">OX 퀴즈</button>
+  <button class="tab" data-t="4">집에서 다시</button>
+</nav>
+
+<main>
+<!-- ① 1도 계산 -->
+<section class="panel on" id="p0">
+  <div class="card">
+    <h2>평균 기온 1도, 정말 조금일까?</h2>
+    <p class="ask">한 해 평균 기온이 1도 오르려면,<br><b>한 달만 더워진다면</b> 그 달은 몇 도 올라야 할까?</p>
+    <div class="btns" id="guess">
+      <button class="bbtn white" data-v="1">1도</button><button class="bbtn white" data-v="6">6도</button><button class="bbtn white" data-v="12">12도</button>
+    </div>
+    <p class="say" id="gSay">답을 하나 골라 봐요.</p>
+    <div id="why" hidden>
+      <div class="white-box">
+        <div class="months" id="months"></div>
+        <p class="calc" id="calc"></p>
+        <div class="range"><span>더워지는 달</span><input type="range" id="mn" min="1" max="12" value="1" aria-label="더워지는 달의 수"><b id="mnV">1달</b></div>
+      </div>
+      <p class="say" id="mSay"></p>
+      <div class="note">
+        <p><b>연평균 기온</b> : 한 해 동안 날마다 잰 기온을 모두 더해 날 수로 나눈 값</p>
+        <p>여기서는 열두 달의 길이가 같다고 보고, 열두 달 기온을 더해 12로 나누는 것으로 어림했어요.</p>
+        <p>평균이 1도 올랐다는 것은 매일 1도씩 올랐다는 뜻이 아니에요. 어떤 때는 훨씬 많이 오를 수 있어요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 운정의 미래 -->
+<section class="panel" id="p1">
+  <div class="card">
+    <h2>우리 동네 운정의 한 해, 앞으로 어떻게 될까?</h2>
+    <div class="btns" id="scn">
+      <button class="bbtn white on" data-s="0">지금<small>2000~2019년</small></button>
+      <button class="bbtn white" data-s="1">줄이면<small>2081~2100년</small></button>
+      <button class="bbtn white" data-s="2">지금처럼<small>2081~2100년</small></button>
+    </div>
+    <div class="white-box">
+      <div class="yr" id="yr" role="img" aria-label="한 해 365일을 봄 여름 가을 겨울 날 수로 나눈 막대"></div>
+      <div class="yrcap"><span>한 해 365일</span><span>막대 속 숫자 : 날 수</span></div>
+      <div class="sgs" id="sgs"></div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <p class="say" id="sSay"></p>
+    <div class="note">
+      <p><b>줄이면</b> : 온실가스를 크게 줄였을 때 (SSP1-2.6) · <b>지금처럼</b> : 지금처럼 계속 내보낼 때 (SSP5-8.5)</p>
+      <p><b>여름</b> : 기상청은 하루 평균 기온이 20℃ 이상인 때를 여름, 5℃ 아래인 때를 겨울로 나눠요.</p>
+      <p class="src">자료 : 기상청 기후정보포털 기후변화 상황판, 파주시 운정3동 (2026-11-17 확인) · 연평균 기온은 그래프 자료로 계산한 어림값이에요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 잦아지는 것 -->
+<section class="panel" id="p2">
+  <div class="card">
+    <h2>지구가 더워지면 더 잦아지고 세지는 것은?</h2>
+    <div class="count">카드를 눌러 골라 봐요 · 찾은 카드 <b id="fnd">0</b> / 5</div>
+    <div class="picks" id="picks"></div>
+    <p class="say" id="pSay">맞는 카드는 5장이에요.</p>
+    <div class="row"><button class="bbtn white" id="pReset">처음부터</button></div>
+  </div>
+</section>
+
+<!-- ④ OX -->
+<section class="panel" id="p3">
+  <div class="quiz">
+    <div class="score"><span id="qn">1</span> / <span id="qt"></span> · 맞힌 수 <b id="sc">0</b></div>
+    <div class="q" id="q"></div>
+    <div class="ox" id="ox"><button class="o" data-a="O">O</button><button class="x" data-a="X">X</button></div>
+    <div class="fb" id="qfb"></div>
+    <div class="row"><button class="bbtn" id="qnext" hidden>다음 문제</button></div>
+  </div>
+</section>
+
+<!-- ⑤ 집에서 다시 -->
+<section class="panel" id="p4">
+  <div class="links">
+    <div class="card">
+      <h2>NASA 지구 타임머신</h2>
+      <div><span class="tag">영어 사이트 · 색만 보기</span></div>
+      <a class="link" href="https://science.nasa.gov/specials/apps/climate-time-machine/" target="_blank" rel="noopener">NASA 지구 타임머신 열기</a>
+      <ol class="steps">
+        <li>빨간 해 그림 <b>Global Temperature</b>를 눌러요.</li>
+        <li>아래에 연도 막대가 나올 때까지 기다려요.</li>
+        <li>▶를 눌러 1884년부터 2022년까지 색이 어떻게 바뀌는지 봐요.</li>
+        <li>숫자(℉)는 읽지 말고 <b>파랑 · 빨강 색</b>만 봐요.</li>
+        <li><b>Sea Ice</b>를 눌러 1979년과 2022년 북극 바다 얼음을 비교해요.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2>기상청 기후변화 상황판</h2>
+      <div><span class="tag">우리 동네 앞으로</span></div>
+      <a class="link warm" href="https://climate.go.kr/atlas/dsh/ccf" target="_blank" rel="noopener">기상청 상황판 열기</a>
+      <ol class="steps">
+        <li>가운데 위 칸에서 <b>경기도 → 파주시 → 운정○동</b>을 골라요.</li>
+        <li><b>「계절길이 미래변화」</b>에서 여름 · 겨울 날 수를 찾아요.</li>
+        <li>왼쪽은 <b>줄이면</b>, 오른쪽은 <b>지금처럼</b>이에요.</li>
+        <li><b>「일 최고기온 연최대」</b>에서 한 해 가장 더운 날 기온을 찾아요.</li>
+        <li>넓은 화면용이라, 태블릿은 가로로 두고 봐요.</li>
+      </ol>
+    </div>
+  </div>
+  <p class="end">온실가스를 줄이면 우리 동네는 덜 바뀌어요.</p>
+</section>
+</main>
+
+<footer><span>어게인 실험과학 수학학원</span> · <span>교육문의 010.2976.5774</span></footer>
+<div class="toast" id="toast">주소가 복사됐어요</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=v=>Number.isInteger(v)?String(v):(Math.round(v*10)/10).toString();
+const approx=v=>(Number.isInteger(v)?'':'약 ')+fmt(v);
+
+/* ---------- 반짝이 ---------- */
+function confetti(){
+  const cols=['#3a9ae0','#ff8a3d','#24407e','#ffd23f','#5cb85c'];
+  for(let i=0;i<70;i++){ const d=document.createElement('div'); d.className='conf';
+    d.style.left=Math.random()*100+'vw'; d.style.background=cols[i%5]; d.style.borderRadius=i%2?'50%':'3px';
+    d.style.animationDuration=1.4+Math.random()*1.6+'s'; d.style.animationDelay=Math.random()*.4+'s';
+    document.body.appendChild(d); setTimeout(()=>d.remove(),3600); }
+}
+function sparkle(el,n=14){
+  const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
+  for(let i=0;i<n;i++){ const s=document.createElement('span'), a=i/n*Math.PI*2, d=60+Math.random()*80;
+    s.className='spk'; s.textContent='✦'; s.style.left=x+'px'; s.style.top=y+'px';
+    s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',Math.sin(a)*d+'px');
+    s.style.color=['#ffc93c','#ff8a3d','#3a9ae0'][i%3]; document.body.appendChild(s); setTimeout(()=>s.remove(),1000); }
+}
+
+/* ---------- 탭 · 링크 복사 ---------- */
+function showTab(t){ $$('.tab').forEach((b,j)=>b.classList.toggle('on',j===t)); $$('.panel').forEach((p,j)=>p.classList.toggle('on',j===t)); }
+$$('.tab').forEach(b=>b.onclick=()=>showTab(+b.dataset.t));
+$('#share').onclick=async()=>{
+  const url=location.href;
+  try{ await navigator.clipboard.writeText(url); }
+  catch(e){ const t=document.createElement('textarea'); t.value=url; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  const el=$('#toast'); el.classList.add('on'); setTimeout(()=>el.classList.remove('on'),1800);
+};
+
+/* ---------- ① 1도 계산 ---------- */
+const ORDER=[8,7,6,9,5,10,4,11,3,12,2,1];   // 더워지는 달을 고르는 차례 (여름부터 바깥으로)
+$('#months').innerHTML=Array.from({length:12},(_,i)=>`<div class="mcol"><div class="mval" id="mv${i+1}"></div><div class="mbox"><div class="mbar" id="mb${i+1}"></div></div><div class="mname">${i+1}월</div></div>`).join('');
+function setMonths(n){
+  const each=12/n, on=ORDER.slice(0,n);
+  for(let m=1;m<=12;m++){ const hot=on.includes(m);
+    $('#mb'+m).style.height=hot?(each/12*100)+'%':'0';
+    $('#mv'+m).textContent=hot?fmt(each):'0'; $('#mv'+m).style.color=hot?'':'#aab4bf'; }
+  $('#mnV').textContent=n+'달';
+  $('#calc').innerHTML=`12도 ÷ ${n}달 = 한 달에 <b>${approx(each)}도</b>씩`;
+  $('#mSay').innerHTML=n===1?'한 달만 더워지면, 그 한 달이 12도를 혼자 다 채워야 해요.'
+    :n===12?'열두 달이 모두 더워지면 달마다 1도씩이면 돼요. <b>12달 × 1도 = 12도</b>'
+    :`${n}달이 나눠 맡으면, 한 달에 ${approx(each)}도씩 올라야 해요. 막대를 모두 더하면 언제나 12도예요.`;
+}
+$('#mn').oninput=e=>setMonths(+e.target.value);
+$$('#guess .bbtn').forEach(b=>b.onclick=()=>{
+  const v=+b.dataset.v, ok=v===12;
+  $$('#guess .bbtn').forEach(x=>x.classList.remove('right','wrong'));
+  b.classList.add(ok?'right':'wrong'); if(!ok) $('#guess [data-v="12"]').classList.add('right');
+  $('#gSay').className='say'+(ok?' good':'');
+  $('#gSay').innerHTML=(ok?'딩동댕! ':'정답은 12도예요. ')+'열두 달 기온을 더해 12로 나누는 것이 평균이라서,<br>평균 1도가 오르려면 더한 값이 <b>12달 × 1도 = 12도</b> 늘어야 해요.';
+  $('#why').hidden=false; $('#mn').value=1; setMonths(1);
+  if(ok) sparkle(b);
+});
+
+/* ---------- ② 운정의 미래 ---------- */
+const SEASON=[['봄','var(--spring)'],['여름','var(--summer)'],['가을','var(--autumn)'],['겨울','var(--winter)']];
+const SC=[
+  {d:[75,114,57,119],start:'5월 29일',hot:35.6,mean:12.2,
+   say:'2000~2019년 운정은 여름 114일, 겨울 119일로 길이가 비슷했어요.'},
+  {d:[83,132,65,85],start:'5월 20일',early:9,hot:38.7,mean:14.5,
+   say:'온실가스를 크게 줄이면, 2081~2100년 여름은 132일이에요.<br>지금보다 18일 길어지지만, <b>지금처럼 갈 때보다 46일 짧아요.</b>'},
+  {d:[75,178,45,67],start:'4월 28일',early:31,hot:43.4,mean:18.8,
+   say:'지금처럼 계속 내보내면, 2081~2100년 여름은 178일로 한 해의 절반 가까이가 돼요.<br>겨울은 67일로 줄어요. <b>줄이면 이만큼 바뀌지 않아요.</b>'},
+];
+$('#yr').innerHTML=SEASON.map(([n,c])=>`<div style="background:${c}"></div>`).join('');
+$('#sgs').innerHTML=SEASON.map(([n,c])=>`<div class="sg" style="border-color:${c}"><div class="n">${n}</div><div class="d"></div><div class="c"></div></div>`).join('');
+$('#tiles').innerHTML=['여름 시작','가장 더운 날','연평균 기온'].map(n=>`<div class="tile"><div class="n">${n}</div><div class="v"></div><div class="c"></div></div>`).join('');
+function setScn(s){
+  const S=SC[s], N=SC[0];
+  $$('#scn .bbtn').forEach(b=>b.classList.toggle('on',+b.dataset.s===s));
+  [...$('#yr').children].forEach((el,i)=>{ el.style.width=S.d[i]/365*100+'%'; el.textContent=S.d[i]; });
+  [...$('#sgs').children].forEach((el,i)=>{ const diff=S.d[i]-N.d[i], c=el.querySelector('.c');
+    el.querySelector('.d').textContent=S.d[i]+'일';
+    c.textContent=s===0?'':diff===0?'그대로':(diff>0?'+':'−')+Math.abs(diff)+'일';
+    c.className='c'+(diff>0?' up':diff<0?' down':''); });
+  const t=$('#tiles').children, d1=(S.hot-N.hot).toFixed(1), d2=(S.mean-N.mean).toFixed(1);
+  t[0].querySelector('.v').textContent=S.start;  t[0].querySelector('.c').textContent=s?S.early+'일 빨라져요':'';
+  t[1].querySelector('.v').textContent=(s?'':'약 ')+S.hot+'℃'; t[1].querySelector('.c').textContent=s?'+'+d1+'℃':'';
+  t[2].querySelector('.v').textContent='약 '+S.mean+'℃';     t[2].querySelector('.c').textContent=s?'+'+d2+'℃':'';
+  $('#sSay').innerHTML=S.say;
+}
+$$('#scn .bbtn').forEach(b=>b.onclick=()=>setScn(+b.dataset.s));
+setScn(0);
+
+/* ---------- ③ 잦아지는 것 고르기 ---------- */
+const CARDS=[
+  ['대형 산불',true,'가물어 숲이 바짝 마르면 불이 잘 붙고 잘 번져요. 울진 산불은 213시간 43분이나 탔어요.'],
+  ['오존층 파괴',false,'오존층 파괴는 프레온 가스 때문이에요. 지구 온난화와는 다른 문제예요.'],
+  ['가뭄',true,'더워지면 땅과 숲의 물이 더 빨리 말라서 가뭄이 잦아지고 세져요.'],
+  ['화산 분화',false,'화산 분화는 땅속 마그마 때문에 일어나요. 기온이 올라서 생기는 일이 아니에요.'],
+  ['지구 기온 상승',true,'온실가스가 열을 붙잡아 지구 평균 기온이 올라가요. 이것이 지구 온난화예요.'],
+  ['식수원 오염',false,'식수원 오염은 사람이 버린 쓰레기와 더러운 물 때문이에요.'],
+  ['대홍수',true,'따뜻한 공기는 수증기를 더 많이 품어서, 한꺼번에 큰비가 쏟아지기 쉬워요.'],
+  ['토양 오염',false,'토양 오염은 사람이 버린 쓰레기와 약품 때문이에요.'],
+  ['북극 바다 얼음 줄어듦',true,'북극은 지구에서 가장 빨리 더워지는 곳이라, 바다 얼음이 녹아 줄어들어요.'],
+];
+let found=0;
+function pReset(){
+  found=0; $('#fnd').textContent=0; $('#pSay').className='say'; $('#pSay').textContent='맞는 카드는 5장이에요.';
+  $('#picks').innerHTML=CARDS.map((c,i)=>`<button class="pick" data-i="${i}">${c[0]}</button>`).join('');
+  $$('#picks .pick').forEach(b=>b.onclick=()=>{
+    const [name,yes,why]=CARDS[+b.dataset.i], fresh=!b.classList.contains('right')&&!b.classList.contains('wrong');
+    if(fresh){ b.classList.add(yes?'right':'wrong'); b.insertAdjacentHTML('beforeend',`<span class="mk">${yes?'○':'✕'}</span>`);
+      if(yes){ found++; $('#fnd').textContent=found; sparkle(b,10); } }
+    $('#pSay').className='say '+(yes?'ok':'no');
+    $('#pSay').innerHTML=`<b>${name} : ${yes?'맞아요!':'아니에요.'}</b><br>${why}`;
+    if(yes&&fresh&&found===5){
+      $('#pSay').innerHTML+='<br><b>5장을 다 찾았어요! 온실가스를 줄이면 이런 일이 덜 늘어나요.</b>'; confetti(); }
+  });
+}
+$('#pReset').onclick=pReset;
+pReset();
+
+/* ---------- ④ OX ---------- */
+const OX=[
+  ['연평균 기온이 1도 올랐다는 것은 매일 1도씩 올랐다는 뜻이다.',false,'평균이 1도 오른 거예요. 한 달만 더워졌다면 그 달은 12도나 올라야 해요.'],
+  ['지금처럼 온실가스를 내보내면 2081~2100년 운정의 여름은 지금보다 길어진다.',true,'114일에서 178일로, 64일이나 길어져요.'],
+  ['지구가 더워지면 가뭄과 대형 산불이 잦아진다.',true,'가물어 숲이 마르면 불이 잘 붙고 잘 번져요.'],
+  ['오존층 파괴는 지구 온난화 때문에 생긴다.',false,'오존층 파괴는 프레온 가스 때문이에요. 지구 온난화와 다른 문제예요.'],
+  ['온실가스를 줄여도, 지금처럼 내보내도 운정의 여름 길이는 똑같다.',false,'줄이면 132일, 지금처럼이면 178일이에요. 줄이면 덜 바뀌어요.'],
+];
+let qi=0, score=0;
+$('#qt').textContent=OX.length;
+function showQ(){
+  $('#ox').hidden=false; $('#qn').textContent=qi+1; $('#sc').textContent=score; $('#q').textContent=OX[qi][0];
+  $('#qfb').textContent=''; $('#qfb').className='fb'; $('#qnext').hidden=true; $$('#ox button').forEach(b=>b.disabled=false);
+}
+$$('#ox button').forEach(b=>b.onclick=()=>{
+  const [,yes,why]=OX[qi], ans=yes?'O':'X', ok=b.dataset.a===ans; $$('#ox button').forEach(x=>x.disabled=true);
+  if(ok){ score++; sparkle(b); }
+  $('#sc').textContent=score; $('#qfb').className='fb '+(ok?'good':'bad');
+  $('#qfb').textContent=(ok?'딩동댕! ':`아쉬워요. 정답은 ${ans}예요. `)+why;
+  $('#qnext').textContent=qi<OX.length-1?'다음 문제':'결과 보기'; $('#qnext').hidden=false;
+});
+$('#qnext').onclick=()=>{
+  if(qi===OX.length){ qi=0; score=0; showQ(); return; }
+  if(++qi<OX.length){ showQ(); return; }
+  $('#q').textContent=`${OX.length}문제 중 ${score}문제를 맞혔어요!`; $('#ox').hidden=true; $('#qfb').className='fb good';
+  $('#qfb').textContent=(score===OX.length?'완벽해요! ':score>=OX.length-2?'잘했어요! ':'괜찮아요. 앞의 탭을 다시 눌러 보고 또 도전해요. ')+'온실가스를 줄이면 우리 동네는 덜 바뀌어요.';
+  $('#qnext').textContent='다시 하기'; if(score===OX.length) confetti();
+};
+showQ();
+
+/* ---------- 시작 (주소 끝 #tab1~#tab5 로 처음 탭 고르기) ---------- */
+const hashTab=location.hash.match(/^#tab([1-5])$/);
+showTab(hashTab?hashTab[1]-1:0);
+</script>
+</body>
+</html>

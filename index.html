@@ -202,9 +202,9 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
       </div>
       <p class="say" id="mSay"></p>
       <div class="note">
-        <p><b>연평균 기온</b> : 한 해 동안 날마다 잰 기온을 모두 더해 날 수로 나눈 값</p>
+        <p><b>연평균 기온</b> : 하루 평균 기온을 한 해 동안 모두 더해 날 수로 나눈 값</p>
         <p>여기서는 열두 달의 길이가 같다고 보고, 열두 달 기온을 더해 12로 나누는 것으로 어림했어요.</p>
-        <p>평균이 1도 올랐다는 것은 매일 1도씩 올랐다는 뜻이 아니에요. 어떤 때는 훨씬 많이 오를 수 있어요.</p>
+        <p>평균 몇 도는 작아 보여도 큰 변화예요. 온실 가스를 줄여 운정의 연평균 기온이 약 2.3℃ 오르는 미래에도, 여름은 18일 늘고 겨울은 34일 줄 것으로 계산돼요. (운정의 미래 탭)</p>
       </div>
     </div>
   </div>
@@ -216,20 +216,21 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
     <h2>우리 동네 운정의 한 해, 앞으로 어떻게 될까?</h2>
     <div class="btns" id="scn">
       <button class="bbtn white on" data-s="0">지금<small>2000~2019년</small></button>
-      <button class="bbtn white" data-s="1">줄이면<small>2081~2100년</small></button>
-      <button class="bbtn white" data-s="2">지금처럼<small>2081~2100년</small></button>
+      <button class="bbtn white" data-s="1">줄이면<small>저탄소</small></button>
+      <button class="bbtn white" data-s="2">많이 내보내면<small>고탄소</small></button>
     </div>
     <div class="white-box">
       <div class="yr" id="yr" role="img" aria-label="한 해 365일을 봄 여름 가을 겨울 날 수로 나눈 막대"></div>
-      <div class="yrcap"><span>한 해 365일</span><span>막대 속 숫자 : 날 수</span></div>
+      <div class="yrcap"><span id="yrWhen">한 해 365일</span><span>막대 속 숫자 : 날 수</span></div>
       <div class="sgs" id="sgs"></div>
     </div>
     <div class="tiles" id="tiles"></div>
     <p class="say" id="sSay"></p>
     <div class="note">
-      <p><b>줄이면</b> : 온실가스를 크게 줄였을 때 (SSP1-2.6) · <b>지금처럼</b> : 지금처럼 계속 내보낼 때 (SSP5-8.5)</p>
+      <p><b>줄이면</b> : 온실 가스를 크게 줄였을 때 (저탄소 시나리오 · SSP1-2.6) · <b>많이 내보내면</b> : 온실 가스를 아주 많이 내보낼 때 (고탄소 시나리오 · SSP5-8.5)</p>
+      <p>두 미래(2081~2100년)는 지금 잰 값이 아니라, 계산으로 내다본 예측이에요.</p>
       <p><b>여름</b> : 기상청은 하루 평균 기온이 20℃ 이상인 때를 여름, 5℃ 아래인 때를 겨울로 나눠요.</p>
-      <p class="src">자료 : 기상청 기후정보포털 기후변화 상황판, 파주시 운정3동 (2026-11-17 확인) · 연평균 기온은 그래프 자료로 계산한 어림값이에요.</p>
+      <p class="src">자료 : 기상청 기후정보포털 기후변화 상황판 (저탄소 SSP1-2.6 · 고탄소 SSP5-8.5), 파주시 운정3동 (2026-11-17 확인) · 연평균 기온은 그래프 자료로 계산한 어림값이에요.</p>
     </div>
   </div>
 </section>
@@ -278,13 +279,13 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
       <ol class="steps">
         <li>가운데 위 칸에서 <b>경기도 → 파주시 → 운정○동</b>을 골라요.</li>
         <li><b>「계절길이 미래변화」</b>에서 여름 · 겨울 날 수를 찾아요.</li>
-        <li>왼쪽은 <b>줄이면</b>, 오른쪽은 <b>지금처럼</b>이에요.</li>
+        <li>왼쪽은 <b>저탄소(줄이면)</b>, 오른쪽은 <b>고탄소(많이 내보내면)</b>예요.</li>
         <li><b>「일 최고기온 연최대」</b>에서 한 해 가장 더운 날 기온을 찾아요.</li>
         <li>넓은 화면용이라, 태블릿은 가로로 두고 봐요.</li>
       </ol>
     </div>
   </div>
-  <p class="end">온실가스를 줄이면 우리 동네는 덜 바뀌어요.</p>
+  <p class="end">온실 가스를 줄이면 우리 동네는 덜 바뀌어요.</p>
 </section>
 </main>
 
@@ -342,7 +343,7 @@ $$('#guess .bbtn').forEach(b=>b.onclick=()=>{
   $$('#guess .bbtn').forEach(x=>x.classList.remove('right','wrong'));
   b.classList.add(ok?'right':'wrong'); if(!ok) $('#guess [data-v="12"]').classList.add('right');
   $('#gSay').className='say'+(ok?' good':'');
-  $('#gSay').innerHTML=(ok?'딩동댕! ':'정답은 12도예요. ')+'평균은 열두 달 기온을 더해 12로 나눈 값이라, 평균이 1도 오르려면 더한 값이 <b>12달 × 1도 = 12도</b> 늘어야 해요.';
+  $('#gSay').innerHTML=(ok?'딩동댕! ':'정답은 12도예요. ')+'열두 달 길이가 같다고 어림하면, 한 해 평균이 1도 오르려면 열두 달이 오른 기온을 모두 더한 값이 <b>12달 × 1도 = 12도</b>가 되어야 해요.';
   $('#why').hidden=false; $('#mn').value=1; setMonths(1);
   if(ok) sparkle(b);
 });
@@ -353,9 +354,9 @@ const SC=[
   {d:[75,114,57,119],start:'5월 29일',hot:35.6,mean:12.2,
    say:'2000~2019년 운정은 여름 114일, 겨울 119일로 길이가 비슷했어요.'},
   {d:[83,132,65,85],start:'5월 20일',early:9,hot:38.7,mean:14.5,
-   say:'온실가스를 크게 줄이면, 2081~2100년 여름은 132일이에요.<br>지금보다 18일 길어지지만, <b>지금처럼 갈 때보다 46일 짧아요.</b>'},
+   say:'온실 가스를 크게 줄여도, 2081~2100년 운정의 여름은 132일, 겨울은 85일이 될 것으로 계산돼요.<br>연평균 기온이 약 2.3℃ 오르는 것만으로도 여름 +18일 · 겨울 −34일이에요. <b>그래도 많이 내보낼 때보다 여름이 46일 짧아요.</b>'},
   {d:[75,178,45,67],start:'4월 28일',early:31,hot:43.4,mean:18.8,
-   say:'지금처럼 계속 내보내면, 2081~2100년 여름은 178일로 한 해의 절반 가까이가 돼요.<br>겨울은 67일로 줄어요. <b>줄이면 이만큼 바뀌지 않아요.</b>'},
+   say:'온실 가스를 아주 많이 내보내면, 2081~2100년 운정의 여름은 178일로 한 해의 절반 가까이가 되고, 겨울은 67일로 줄 것으로 계산돼요.<br><b>줄이면 이만큼 바뀌지 않아요.</b>'},
 ];
 $('#yr').innerHTML=SEASON.map(([n,c])=>`<div style="background:${c}"></div>`).join('');
 $('#sgs').innerHTML=SEASON.map(([n,c])=>`<div class="sg" style="border-color:${c}"><div class="n">${n}</div><div class="d"></div><div class="c"></div></div>`).join('');
@@ -369,10 +370,11 @@ function setScn(s){
     c.textContent=s===0?'':diff===0?'그대로':(diff>0?'+':'−')+Math.abs(diff)+'일';
     c.className='c'+(diff>0?' up':diff<0?' down':''); });
   const t=$('#tiles').children, d1=(S.hot-N.hot).toFixed(1), d2=(S.mean-N.mean).toFixed(1);
-  t[0].querySelector('.v').textContent=S.start;  t[0].querySelector('.c').textContent=s?S.early+'일 빨라져요':'';
+  t[0].querySelector('.v').textContent=S.start;  t[0].querySelector('.c').textContent=s?S.early+'일 빨라짐':'';
   t[1].querySelector('.v').textContent=(s?'':'약 ')+S.hot+'℃'; t[1].querySelector('.c').textContent=s?'+'+d1+'℃':'';
   t[2].querySelector('.v').textContent='약 '+S.mean+'℃';     t[2].querySelector('.c').textContent=s?'+'+d2+'℃':'';
   $('#sSay').innerHTML=S.say;
+  $('#yrWhen').textContent=(s?'2081~2100년 예측':'2000~2019년')+' · 한 해 365일';
 }
 $$('#scn .bbtn').forEach(b=>b.onclick=()=>setScn(+b.dataset.s));
 setScn(0);
@@ -382,7 +384,7 @@ const CARDS=[   // 순서는 2줄 · 3줄 어느 배치에서도 정답이 한 �
   ['오존층 파괴',false,'오존층 파괴는 프레온 가스 때문이에요. 지구 온난화와는 다른 문제예요.'],
   ['가뭄',true,'더워지면 땅과 숲의 물이 더 빨리 말라서 가뭄이 잦아지고 세져요.'],
   ['대형 산불',true,'가물어 숲이 바짝 마르면 불이 잘 붙고 잘 번져요. 울진 산불은 213시간 43분이나 탔어요.'],
-  ['지구 기온 상승',true,'온실가스가 열을 붙잡아 지구 평균 기온이 올라가요. 이것이 지구 온난화예요.'],
+  ['지구 기온 상승',true,'온실 가스가 열을 붙잡아 지구 평균 기온이 올라가요. 이것이 지구 온난화예요.'],
   ['화산 분화',false,'화산 분화는 땅속 마그마 때문에 일어나요. 기온이 올라서 생기는 일이 아니에요.'],
   ['식수원 오염',false,'식수원 오염은 사람이 버린 쓰레기와 더러운 물 때문이에요.'],
   ['토양 오염',false,'토양 오염은 사람이 버린 쓰레기와 약품 때문이에요.'],
@@ -400,7 +402,7 @@ function pReset(){
     $('#pSay').className='say '+(yes?'ok':'no');
     $('#pSay').innerHTML=`<b>${name} : ${yes?'맞아요!':'아니에요.'}</b><br>${why}`;
     if(yes&&fresh&&found===5){
-      $('#pSay').innerHTML+='<br><b>5장을 다 찾았어요! 온실가스를 줄이면 이런 일이 덜 늘어나요.</b>'; confetti(); }
+      $('#pSay').innerHTML+='<br><b>5장을 다 찾았어요! 온실 가스를 줄이면 이런 일이 덜 늘어나요.</b>'; confetti(); }
   });
 }
 $('#pReset').onclick=pReset;
@@ -408,11 +410,11 @@ pReset();
 
 /* ---------- ④ OX ---------- */
 const OX=[
-  ['연평균 기온이 1도 올랐다는 것은 매일 1도씩 올랐다는 뜻이다.',false,'평균이 1도 오른 거예요. 한 달만 더워졌다면 그 달은 12도나 올라야 해요.'],
-  ['지금처럼 온실가스를 내보내면 2081~2100년 운정의 여름은 지금보다 길어진다.',true,'114일에서 178일로, 64일이나 길어져요.'],
+  ['한 달만 더워져서 한 해 평균 기온이 1도 오르려면, 그 달도 1도만 오르면 된다.',false,'그 한 달이 열두 달 몫을 다 채워야 해서, 12달 × 1도 = 12도나 올라야 해요.'],
+  ['온실 가스를 많이 내보내면 2081~2100년 운정의 여름은 지금보다 길어질 것으로 계산된다.',true,'114일에서 178일로, 64일이나 길어질 것으로 계산돼요.'],
   ['지구가 더워지면 가뭄과 대형 산불이 잦아진다.',true,'가물어 숲이 마르면 불이 잘 붙고 잘 번져요.'],
   ['오존층 파괴는 지구 온난화 때문에 생긴다.',false,'오존층 파괴는 프레온 가스 때문이에요. 지구 온난화와 다른 문제예요.'],
-  ['온실가스를 줄여도, 지금처럼 내보내도 운정의 여름 길이는 똑같다.',false,'줄이면 132일, 지금처럼이면 178일이에요. 줄이면 덜 바뀌어요.'],
+  ['온실 가스를 줄여도, 많이 내보내도 2081~2100년 운정의 여름 길이는 똑같을 것으로 계산된다.',false,'줄이면 132일, 많이 내보내면 178일로 계산돼요. 줄이면 덜 바뀌어요.'],
 ];
 let qi=0, score=0;
 $('#qt').textContent=OX.length;
@@ -431,7 +433,7 @@ $('#qnext').onclick=()=>{
   if(qi===OX.length){ qi=0; score=0; showQ(); return; }
   if(++qi<OX.length){ showQ(); return; }
   $('#q').textContent=`${OX.length}문제 중 ${score}문제를 맞혔어요!`; $('#ox').hidden=true; $('#qfb').className='fb good';
-  $('#qfb').textContent=(score===OX.length?'완벽해요! ':score>=OX.length-2?'잘했어요! ':'괜찮아요. 앞의 탭을 다시 눌러 보고 또 도전해요. ')+'온실가스를 줄이면 우리 동네는 덜 바뀌어요.';
+  $('#qfb').textContent=(score===OX.length?'완벽해요! ':score>=OX.length-2?'잘했어요! ':'괜찮아요. 앞의 탭을 다시 눌러 보고 또 도전해요. ')+'온실 가스를 줄이면 우리 동네는 덜 바뀌어요.';
   $('#qnext').textContent='다시 하기'; if(score===OX.length) confetti();
 };
 showQ();

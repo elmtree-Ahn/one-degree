@@ -166,6 +166,7 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
   .yr{height:60px}
   .picks{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .pick{min-height:72px}
+  .pick:last-child{grid-column:1/-1}
 }
 </style>
 </head>
@@ -341,7 +342,7 @@ $$('#guess .bbtn').forEach(b=>b.onclick=()=>{
   $$('#guess .bbtn').forEach(x=>x.classList.remove('right','wrong'));
   b.classList.add(ok?'right':'wrong'); if(!ok) $('#guess [data-v="12"]').classList.add('right');
   $('#gSay').className='say'+(ok?' good':'');
-  $('#gSay').innerHTML=(ok?'딩동댕! ':'정답은 12도예요. ')+'열두 달 기온을 더해 12로 나누는 것이 평균이라서,<br>평균 1도가 오르려면 더한 값이 <b>12달 × 1도 = 12도</b> 늘어야 해요.';
+  $('#gSay').innerHTML=(ok?'딩동댕! ':'정답은 12도예요. ')+'평균은 열두 달 기온을 더해 12로 나눈 값이라, 평균이 1도 오르려면 더한 값이 <b>12달 × 1도 = 12도</b> 늘어야 해요.';
   $('#why').hidden=false; $('#mn').value=1; setMonths(1);
   if(ok) sparkle(b);
 });
@@ -377,16 +378,16 @@ $$('#scn .bbtn').forEach(b=>b.onclick=()=>setScn(+b.dataset.s));
 setScn(0);
 
 /* ---------- ③ 잦아지는 것 고르기 ---------- */
-const CARDS=[
-  ['대형 산불',true,'가물어 숲이 바짝 마르면 불이 잘 붙고 잘 번져요. 울진 산불은 213시간 43분이나 탔어요.'],
+const CARDS=[   // 순서는 2줄 · 3줄 어느 배치에서도 정답이 한 줄로 몰리지 않게 섞음
   ['오존층 파괴',false,'오존층 파괴는 프레온 가스 때문이에요. 지구 온난화와는 다른 문제예요.'],
   ['가뭄',true,'더워지면 땅과 숲의 물이 더 빨리 말라서 가뭄이 잦아지고 세져요.'],
-  ['화산 분화',false,'화산 분화는 땅속 마그마 때문에 일어나요. 기온이 올라서 생기는 일이 아니에요.'],
+  ['대형 산불',true,'가물어 숲이 바짝 마르면 불이 잘 붙고 잘 번져요. 울진 산불은 213시간 43분이나 탔어요.'],
   ['지구 기온 상승',true,'온실가스가 열을 붙잡아 지구 평균 기온이 올라가요. 이것이 지구 온난화예요.'],
+  ['화산 분화',false,'화산 분화는 땅속 마그마 때문에 일어나요. 기온이 올라서 생기는 일이 아니에요.'],
   ['식수원 오염',false,'식수원 오염은 사람이 버린 쓰레기와 더러운 물 때문이에요.'],
-  ['대홍수',true,'따뜻한 공기는 수증기를 더 많이 품어서, 한꺼번에 큰비가 쏟아지기 쉬워요.'],
   ['토양 오염',false,'토양 오염은 사람이 버린 쓰레기와 약품 때문이에요.'],
   ['북극 바다 얼음 줄어듦',true,'북극은 지구에서 가장 빨리 더워지는 곳이라, 바다 얼음이 녹아 줄어들어요.'],
+  ['대홍수',true,'따뜻한 공기는 수증기를 더 많이 품어서, 한꺼번에 큰비가 쏟아지기 쉬워요.'],
 ];
 let found=0;
 function pReset(){
